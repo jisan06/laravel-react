@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import jwtDecode from 'jwt-decode'
+import Axios from 'axios'
+
 import store from './store';
 import * as Types from './store/actions/types'
 
 import Header from './Header';
-import Footer from './Footer';
 import setAuthToken from './utils/setAuthToken'
+import { BrowserRouter as Router } from 'react-router-dom';
+import axios from 'axios'
 
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import packageJson from '../package.json';
+
+axios.defaults.baseURL = packageJson.server_url;
+var baseURL = packageJson.base_url;
 
 const token = localStorage.getItem('auth_token')
 if (token) {
@@ -23,18 +29,18 @@ if (token) {
     })
 }
 
-export default class Index extends Component {
+export default class App extends Component {
     render() {
         return (
-        	<Provider store = {store}>
-	            <div className="container">
-	                <Header />
-	            </div>
-            </Provider>
+
+            <Router basename={baseURL}>
+            	<Provider store = {store}>
+    	            <div className="container">
+    	                <Header />
+    	            </div>
+                </Provider>
+            </Router>
         );
     }
 }
 
-if (document.getElementById('app')) {
-    ReactDOM.render(<Router><Index /></Router>, document.getElementById('app'));
-}

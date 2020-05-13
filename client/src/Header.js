@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route, Switch, withRouter,Redirect } from 'react-router-dom';
+import { Link, Route, Switch, withRouter,Redirect,BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 import PublicHeader from './pages/PublicHeader';
@@ -42,11 +42,12 @@ class Header extends Component {
 
 
                             <Route exact path="/*" component={Error404} />
+                            
                         </Switch>
+                        
                     </div>
                 </div>
             </div>
-
         );
     }
 }
@@ -70,4 +71,3 @@ const mapStateToProps = state => ({
 })
 
 export default withRouter(connect(mapStateToProps)(Header))
-//export default Header
